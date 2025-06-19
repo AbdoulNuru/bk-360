@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import { EmptyState } from '../ui/empty-state';
 import { Skeleton } from '../ui/skeleton';
 import * as Dialog from '@radix-ui/react-dialog';
+import { maskAccountNumber, maskCustomerId } from '../../lib/utils';
 
 const ProductModal = ({ customer }: { customer: any }) => (
   <Dialog.Portal>
@@ -18,14 +19,14 @@ const ProductModal = ({ customer }: { customer: any }) => (
           <Dialog.Title className="text-xl font-semibold text-blue-900">
             {customer.customer_name}
           </Dialog.Title>
-          <div className="text-sm text-gray-500">Account: {customer.account_number}</div>
+          <div className="text-sm text-gray-500">Account: {maskAccountNumber(customer.account_number)}</div>
         </div>
       </div>
 
       <div className="space-y-4">
         <div className="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg">
           <span className="text-sm font-medium text-gray-600">Customer ID</span>
-          <span className="text-sm font-semibold text-blue-900">{customer.customer_id}</span>
+          <span className="text-sm font-semibold text-blue-900">{maskCustomerId(customer.customer_id)}</span>
         </div>
         <div className="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg">
           <span className="text-sm font-medium text-gray-600">Cluster</span>
@@ -182,7 +183,7 @@ const RecommendAll: React.FC = () => {
                     <div className="text-sm font-medium text-gray-900">{customer.customer_name}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{customer.account_number}</div>
+                    <div className="text-sm text-gray-500">{maskAccountNumber(customer.account_number)}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-500">Cluster {customer.cluster}</div>

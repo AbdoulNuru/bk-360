@@ -6,6 +6,7 @@ import { EmptyState } from '../ui/empty-state';
 import { Skeleton } from '../ui/skeleton';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as XLSX from 'xlsx';
+import { maskAccountNumber, maskCustomerId } from '../../lib/utils';
 
 const ProductModal = ({ customer }: { customer: any }) => (
   <Dialog.Portal>
@@ -19,7 +20,7 @@ const ProductModal = ({ customer }: { customer: any }) => (
           <Dialog.Title className="text-xl font-semibold text-blue-900">
             {customer.customer_name}
           </Dialog.Title>
-          <div className="text-sm text-gray-500">Account: {customer.account_number}</div>
+          <div className="text-sm text-gray-500">Account: {maskAccountNumber(customer.account_number)}</div>
         </div>
       </div>
 
@@ -180,14 +181,14 @@ const BatchRecommend: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-blue-900">{customer.customer_name}</h3>
-                    <div className="text-sm text-gray-500">Account: {customer.account_number}</div>
+                    <div className="text-sm text-gray-500">Account: {maskAccountNumber(customer.account_number)}</div>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg">
                     <span className="text-sm font-medium text-gray-600">Customer ID</span>
-                    <span className="text-sm font-semibold text-blue-900">{customer.customer_id}</span>
+                    <span className="text-sm font-semibold text-blue-900">{maskCustomerId(customer.customer_id)}</span>
                   </div>
                   <div className="flex justify-between items-center py-3 px-4 bg-gray-50 rounded-lg">
                     <span className="text-sm font-medium text-gray-600">Cluster</span>
@@ -314,7 +315,7 @@ const BatchRecommend: React.FC = () => {
                       key={account}
                       className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border"
                     >
-                      <span className="text-sm">{account}</span>
+                      <span className="text-sm">{maskAccountNumber(account)}</span>
                       <button
                         onClick={() => handleRemoveAccount(account)}
                         className="text-gray-400 hover:text-gray-600"
