@@ -3,6 +3,7 @@ import { ArrowRight, Brain, Database, Search, Users, CheckCircle2, ListFilter, T
 import { Button } from '../ui/button';
 import { TestAccount } from '../../types';
 import StatsSection from './StatsSection';
+import { maskAccountNumber, getOriginalAccountNumber } from '../../lib/utils';
 
 const HomePage: React.FC<{ onNavigate: (path: string) => void }> = ({ onNavigate }) => {
   const testAccounts: TestAccount[] = [
@@ -188,7 +189,7 @@ const HomePage: React.FC<{ onNavigate: (path: string) => void }> = ({ onNavigate
                           </div>
                           <div className="flex-grow min-w-0">
                             <h3 className="text-base font-semibold text-gray-900 truncate">{account.name}</h3>
-                            <p className="text-sm text-blue-600 font-medium mt-0.5">Account: {account.accountNumber}</p>
+                            <p className="text-sm text-blue-600 font-medium mt-0.5">Account: {maskAccountNumber(account.accountNumber)}</p>
                             <p className="text-sm text-gray-600 mt-1">{account.description}</p>
                           </div>
                           <Button
